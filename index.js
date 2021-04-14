@@ -27,6 +27,10 @@ client.subscribe("approval", async function({ task, taskService }) {
         console.log(response.data);
         processVariables.set("poNumber", response.data.poNumber);
         processVariables.set("quantity", response.data.quantity);
+        processVariables.set("customerNumber", response.data.customerNumber);
+        processVariables.set("lineItem", response.data.lineItem);
+        processVariables.set("paymentReference", response.data.paymentReference);
+        processVariables.set("date", response.data.date);
         processVariables.set("error", "none");
     }
     else {
