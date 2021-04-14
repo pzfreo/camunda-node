@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_03fztlx" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <bpmn:process id="ApproveOrder" name="ApproveOrder" isExecutable="true" camunda:versionTag="1.0.0">
+    <bpmn:startEvent id="start" name="start">
+      <bpmn:outgoing>Flow_15q4ye3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="end" name="end">
+      <bpmn:incoming>Flow_10s9eev</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_15q4ye3" sourceRef="start" targetRef="collectID" />
+    <bpmn:userTask id="collectID" name="collectId" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property />
+        </camunda:properties>
+        <camunda:formData>
+          <camunda:formField id="orderid" label="orderid" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15q4ye3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fsfmv4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="CallService" name="CallService" camunda:type="external" camunda:topic="getPurchase">
+      <bpmn:incoming>Flow_0fsfmv4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ouoe0b</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0ouoe0b" sourceRef="CallService" targetRef="displayData" />
+    <bpmn:sequenceFlow id="Flow_10s9eev" sourceRef="displayData" targetRef="end" />
+    <bpmn:userTask id="displayData" name="displayData" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="quantity" label="quantity" type="string" />
+          <camunda:formField id="poNumber" label="poNumber" type="string" />
+          <camunda:formField id="date" label="date" type="string" />
+          <camunda:formField id="error" label="error" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ouoe0b</bpmn:incoming>
+      <bpmn:outgoing>Flow_10s9eev</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0fsfmv4" sourceRef="collectID" targetRef="CallService" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ApproveOrder">
+      <bpmndi:BPMNEdge id="Flow_15q4ye3_di" bpmnElement="Flow_15q4ye3">
+        <di:waypoint x="188" y="110" />
+        <di:waypoint x="310" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ouoe0b_di" bpmnElement="Flow_0ouoe0b">
+        <di:waypoint x="620" y="110" />
+        <di:waypoint x="710" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10s9eev_di" bpmnElement="Flow_10s9eev">
+        <di:waypoint x="810" y="110" />
+        <di:waypoint x="902" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fsfmv4_di" bpmnElement="Flow_0fsfmv4">
+        <di:waypoint x="410" y="110" />
+        <di:waypoint x="520" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
+        <dc:Bounds x="152" y="92" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="135" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0tra6vl_di" bpmnElement="collectID">
+        <dc:Bounds x="310" y="70" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0k36sqg_di" bpmnElement="displayData">
+        <dc:Bounds x="710" y="70" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1shqkkb_di" bpmnElement="end">
+        <dc:Bounds x="902" y="92" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="911" y="135" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gqscjp_di" bpmnElement="CallService">
+        <dc:Bounds x="520" y="70" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
