@@ -1,26 +1,17 @@
 const { Client, logger, Variables } = require("camunda-external-task-client-js");
 const axios = require("axios");
 
-// configuration for the Client:
-//  - 'baseUrl': url to the Process Engine
-//  - 'logger': utility to automatically log important events
 const config = { baseUrl: "http://localhost:8080/engine-rest", use: logger };
 
 // create a Client instance with custom configuration
 const client = new Client(config);
 
-// susbscribe to the topic: 'creditScoreChecker'
-client.subscribe("approval", async function({ task, taskService }) {
-  console.log("I just got called");
-  // get the process variable 'score'
+client.subscribe("getPurchase", async function({ task, taskService }) {
   const orderid = task.variables.get("orderid");
-  console.log(orderid)
-
   const processVariables = new Variables();
   const localVariables = new Variables();
   try {
-
-  
+    // call the purchase service using orderid
     const response = await axios.get(`http://localhost:8000/purchase/${orderid}`);
     if (response.status == 200) {
         console.log("found");
@@ -40,6 +31,5 @@ client.subscribe("approval", async function({ task, taskService }) {
         processVariables.set("error", "server not available");
   }
 
-  
   await taskService.complete(task, processVariables, localVariables);
 });
