@@ -22,6 +22,8 @@ client.subscribe("approval", async function({ task, taskService }) {
   
     const response = await axios.get(`http://localhost:8000/purchase/${orderid}`);
     if (response.status == 200) {
+        console.log("found");
+        console.log(response.data);
         processVariables.set("poNumber", response.data.poNumber);
         processVariables.set("quantity", response.data.quantity);
     }
