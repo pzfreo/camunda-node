@@ -6,6 +6,7 @@
   "author": "Paul Fremantle <pzfreo@github.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "camunda-external-task-client-js": "^2.1.0"
   }
 }
