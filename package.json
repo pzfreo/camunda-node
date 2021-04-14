@@ -1,0 +1,11 @@
+{
+  "name": "camunda-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:pzfreo/camunda-node.git",
+  "author": "Paul Fremantle <pzfreo@github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "camunda-external-task-client-js": "^2.1.0"
+  }
+}
