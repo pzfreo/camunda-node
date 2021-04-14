@@ -17,6 +17,7 @@ client.subscribe("approval", async function({ task, taskService }) {
   console.log(orderid)
 
   const processVariables = new Variables();
+  const localVariables = new Variables();
   try {
 
   
@@ -35,5 +36,5 @@ client.subscribe("approval", async function({ task, taskService }) {
   }
 
   
-  await taskService.complete(task);
+  await taskService.complete(task, processVariables, localVariables);
 });
