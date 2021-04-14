@@ -27,6 +27,7 @@ client.subscribe("approval", async function({ task, taskService }) {
         console.log(response.data);
         processVariables.set("poNumber", response.data.poNumber);
         processVariables.set("quantity", response.data.quantity);
+        processVariables.set("error", "none");
     }
     else {
         processVariables.set("error", "orderid not found");
